@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">防丢卫士</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+     <string-array name="country">
+         <item>Croatia</item>
+         <item>Czech</item>
+         <item>Denmark</item>
+         <item>England</item>
+         <item>France</item>
+         <item>Germany</item>
+         <item>Goal</item>
+         <item>Greece</item>
+         <item>Ireland</item>
+         <item>Italy</item>
+         <item>Netherlands</item>
+         <item>Poland</item>
+         <item>Portugal</item>
+         <item>Ukraine</item>
+         <item>Russian</item>
+         <item>Spain</item>
+           </string-array>
+</resources>

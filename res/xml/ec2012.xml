@@ -1,0 +1,391 @@
+<europe_cup>
+    <group name="A">
+        <teams>
+	        <team name="Czech" W="2" D="0" L="1" F="4" A="5" Pts="6" />
+	        <team name="Greece" W="1" D="1" L="1" F="3" A="3" Pts="4" />
+	        <team name="Russian" W="1" D="1" L="1" F="5" A="3" Pts="4" />
+	        <team name="Poland" W="0" D="2" L="1" F="2" A="3" Pts="2" />
+        </teams>
+       	<games>
+       	    <game home="Poland" away="Greece" result="1:1" date="8 June 2012">       	        
+       	    	<home>
+					<player name="Lewandowski" event="goals" time="17" />
+					<player name="Szczesny" event="reds" time="69" />
+        	    	<player name="Rybus" event="substs" time="70" />
+        	    	<player name="Tyton" event="substs" time="70" />
+        	    </home>
+        	    <away>
+					<player name="Papastathopoulos" event="yells" time="35" />
+					<player name="Papadopoulos" event="substs" time="37" />
+        	    	<player name="Unkonwplayer" event="substs" time="37" />
+        	   		<player name="Papastathopoulos" event="yell_reds" time="44" />
+        	   		<player name="Jose Holebas" event="yells" time="45+2" />
+        			<player name="Sotiris Ninis" event="substs" time="46" />
+        	      	<player name="Salpingidis" event="substs" time="46" />
+        	    	<player name="Salpingidis" event="goals" time="51" />
+        	       	<player name="Karagounis" event="yells" time="54" />
+        	      	<player name="Fanis Gekas" event="substs" time="68" />
+        	       	<player name="Kostas Fortounis" event="substs" time="68" />
+        		</away>
+       	    </game>
+       	    <games>
+       	    <game home="Russian" away="Czech" result="4:1" date="8 June 2012">
+				<home>
+					<player name="Alan Dzagoev" event="goals" time="15" />
+        	  		<player name="Roman Shirokov" event="goals" time="24" />
+        	     	<player name="Kerzhakov" event="substs" time="73" />
+        	      	<player name="Pavlyuchenko" event="substs" time="73" />
+        	      	<player name="Alan Dzagoev" event="goals" time="79" />
+        	      	<player name="Pavlyuchenko" event="goals" time="82" />
+        	      	<player name="Alan Dzagoev" event="substs" time="84" />
+        	       	<player name="Kokorin" event="substs" time="84" />
+        	 	</home>
+        	   	<away>
+        	     	<player name="Jan Rezek" event="substs" time="46" />
+        	    	<player name="Tomas Hubschman" event="substs" time="46" />
+        	   		<player name="Vaclav Pilar" event="goals" time="52" />
+        	    	<player name="Petr Jiracek" event="substs" time="76" />
+        	   		<player name="David Limbersky" event="substs" time="76" />
+        	   		<player name="Milan Baros" event="substs" time="85" />
+        	     	<player name="David Lafata" event="substs" time="85" />
+        	  	</away>   
+       	    </game>
+       	    <game home="Poland" away="Russian" result="1:1" date="12 June 2012">
+       	            <home>
+        	            <player name="Blaszczykowski" event="goals" time="57" />
+        	            <player name="Lewandowski" event="yells" time="60" />
+        	            <player name="Dariusz Dudka" event="substs" time="73" />
+        	            <player name="Mierzejewski" event="substs" time="73" />
+        	            <player name="Eugen Polanski" event="yells" time="79" />
+        	            <player name="Eugen Polanski" event="substs" time="85" />
+        	            <player name="Adam Matuszczyk" event="substs" time="85" />
+        	            <player name="Ludovic Obraniak" event="substs" time="90+3" />
+        	            <player name="Pawel Brozek" event="substs" time="90+3" />
+        	        </home>
+        	        <away>
+        	            <player name="Alan Dzagoev" event="goals" time="37" />
+        	            <player name="Igor Denisov" event="yells" time="60" />
+        	            <player name="Kerzhakov" event="substs" time="70" />
+        	            <player name="Pavlyuchenko" event="substs" time="70" />
+        	            <player name="Alan Dzagoev" event="yells" time="75" />
+        	            <player name="Alan Dzagoev" event="substs" time="79" />
+        	            <player name="Marat Izmailov" event="substs" time="79" />
+        	        </away>
+       	    </game>
+       	</games>
+		<game home="Czech" away="Greece" result="2:1" date="12 June 2012">
+       	        
+       	            <home>
+        	            <player name="Petr Jiracek" event="goals" time="3" />
+        	            <player name="Vaclav Pilar" event="goals" time="6" />
+        	            <player name="Tomas Rosicky" event="yells" time="27" />
+        	            <player name="Petr Jiracek" event="yells" time="36" />
+        	            <player name="Tomas Rosicky" event="substs" time="46" />
+        	            <player name="Daniel Kolar" event="substs" time="46" />
+        	            <player name="Milan Baros" event="substs" time="64" />
+        	            <player name="Tomas Pekhart" event="substs" time="64" />
+        	            <player name="Daniel Kolar" event="yells" time="65" />
+        	            <player name="Daniel Kolar" event="substs" time="90" />
+        	            <player name="Rajtoral" event="substs" time="90" />
+        	        </home>
+        	        <away>
+        	            <player name="Chalkias" event="substs" time="23" />
+        	            <player name="Sifakis" event="substs" time="23" />
+        	            <player name="Torossidis" event="yells" time="34" />
+						<player name="Fotakis" event="substs" time="46" />
+        	            <player name="Fanis Gekas" event="substs" time="46" />
+        	            <player name="Fanis Gekas" event="goals" time="53" />
+        	            <player name="Papadopoulos" event="yells" time="56" />
+        	            <player name="Salpingidis" event="yells" time="57" />
+        	            <player name="Igor Denisov" event="yells" time="60" />
+        	            <player name="Fortounis" event="substs" time="71" />
+        	            <player name="Mitroglou" event="substs" time="71" />
+        	        </away>
+       	        
+       	    </game>
+       	</games>
+    </group>
+	<group name="B">
+        <teams>
+	        <team name="Germany" W="2" D="0" L="0" F="3" A="1" Pts="6" />
+	        <team name="Portugal" W="1" D="0" L="1" F="3" A="3" Pts="3" />
+	        <team name="Denmark" W="1" D="0" L="1" F="3" A="3" Pts="3" />
+	        <team name="Netherlands" W="0" D="0" L="2" F="1" A="3" Pts="0" />
+        </teams>
+        <games>
+			<game home="Netherlands" away="Denmark" result="0:1" date="9 June 2012">
+       	        
+       	            <home>
+        	            <player name="van Bommel" event="yells" time="67" />
+        	            <player name="de Jong" event="substs" time="71" />
+        	            <player name="Huntelaar" event="substs" time="71" />
+        	            <player name="Afellay" event="yells" time="71" />
+        	            <player name="van der Vaart" event="substs" time="71" />
+        	            <player name="van der Wiel" event="substs" time="85" />
+        	            <player name="Dirk Kuyt" event="substs" time="85" />
+        	        </home>
+        	        <away>
+        	            <player name="Krohn-Dehli" event="goals" time="24" />
+        	            <player name="Eriksen" event="substs" time="74" />
+        	            <player name="Lasse Schone" event="substs" time="74" />
+						<player name="Simon Poulsen" event="yells" time="78" />
+        	            <player name="William Kvist" event="yells" time="81" />
+        	            <player name="Rommedahl" event="substs" time="84" />
+        	            <player name="Mikkelsen" event="substs" time="84" />
+        	        </away>
+       	        
+       	    </game>
+       	    <game home="Germany" away="Portugal" result="1:0" date="9 June 2012">
+       	        
+       	            <home>
+        	            <player name="Badstuber" event="yells" time="43" />
+        	            <player name="Boateng" event="yells" time="69" />
+        	            <player name="Mario Gomez" event="goals" time="72" />
+        	            <player name="Afellay" event="substs" time="80" />
+        	            <player name="Klose" event="substs" time="80" />
+        	            <player name="Ozil" event="substs" time="87" />
+        	            <player name="Kroos" event="substs" time="87" />
+        	            <player name="Thomas Muller" event="substs" time="90+4" />
+        	            <player name="Bender" event="substs" time="90+4" />
+        	        </home>
+        	        <away>
+        	            <player name="Helder Postiga" event="yells" time="13" />
+        	            <player name="Fabio Coentrao" event="yells" time="60" />
+        	            <player name="Helder Postiga" event="substs" time="70" />
+						<player name="Nelson Oliveira" event="substs" time="70" />
+        	            <player name="Raul Meireles" event="substs" time="80" />
+        	            <player name="Silvestre Varela" event="substs" time="80" />
+        	        </away>
+       	        
+       	    </game>
+       	    <game home="Denmark" away="Portugal" result="2:3" date="13 June 2012">
+       	        
+       	            <home>
+        	            <player name="Niki Zimling" event="substs" time="16" />
+        	            <player name="Jakob Poulsen" event="substs" time="16" />
+        	            <player name="Nicklas Bendtner" event="goals" time="41" />
+        	            <player name="Jakob Poulsen" event="yells" time="56" />
+        	            <player name="Dennis Rommedahl" event="substs" time="60" />
+        	            <player name="Tobias Mikkelsen" event="substs" time="60" />
+        	            <player name="Lars Jacobsen" event="yells" time="81" />
+        	            <player name="Bendtner" event="goals" time="80" />
+        	            <player name="Krohn-Dehli" event="substs" time="90+2" />
+        	            <player name="Lasse Sch9ne" event="substs" time="90+2" />
+        	        </home>
+        	        <away>
+        	            <player name="Pepe" event="goals" time="24" />
+        	            <player name="Raul Meireles" event="yells" time="29" />
+        	            <player name="Helder Postiga" event="goals" time="36" />
+        	            <player name="Helder Postiga" event="substs" time="64" />
+						<player name="Nelson Oliveira" event="substs" time="64" />
+        	            <player name="Raul Meireles" event="substs" time="84" />
+        	            <player name="Silvestre Varela" event="substs" time="84" />
+        	            <player name="Silvestre Varela" event="goals" time="87" />
+        	            <player name="Nani" event="substs" time="89" />
+        	            <player name="Rolando" event="substs" time="89" />
+        	            <player name="Cristiano Ronaldo" event="yells" time="90+2" />
+        	        </away>
+       	        
+       	    </game>
+       	    <game home="Netherlands" away="Germany" result="1:2" date="13 June 2012">
+       	        
+       	            <home>
+        	            <player name="van Bommel" event="substs" time="46" />
+        	            <player name="Huntelaar" event="substs" time="46" />
+        	            <player name="Ibrahim Afellay" event="substs" time="46" />
+        	            <player name="Rafael van der Vaart" event="substs" time="46" />
+        	            <player name="Robin van Persie" event="goals" time="73" />
+        	            <player name="Nigel de Jong" event="yells" time="80" />
+        	            <player name="Arjen Robben" event="substs" time="83" />
+        	            <player name="Dirk Kuyt" event="substs" time="83" />
+        	            <player name="Jetro Willems" event="yells" time="90" />
+        	        </home>
+        	        <away>
+        	            <player name="Mario Gomez" event="goals" time="24" />
+        	            <player name="Mario Gomez" event="goals" time="38" />
+        	            <player name="Mario Gomez" event="substs" time="72" />
+        	            <player name="Miroslav Klose" event="substs" time="72" />
+						<player name="Mesut Ozil" event="substs" time="81" />
+        	            <player name="Toni Kroos" event="substs" time="81" />
+        	            <player name="Jerome Boateng" event="yells" time="87" />
+        	            <player name="Thomas Muller" event="substs" time="90+2" />
+        	            <player name="Lars Bender" event="substs" time="90+2" />
+        	        </away>
+       	        
+       	    </game>
+       	</games>
+	</group>
+	<group name="C">
+        <teams>
+	        <team name="Spain" W="1" D="1" L="0" F="5" A="1" Pts="4" />
+	        <team name="Croatia" W="1" D="1" L="0" F="4" A="2" Pts="4" />
+	        <team name="Italy" W="0" D="2" L="0" F="2" A="2" Pts="2" />
+	        <team name="Ireland" W="0" D="0" L="2" F="1" A="7" Pts="0" />
+        </teams>
+		<games>
+			<game home="Spain" away="Italy" result="1:1" date="10 June 2012">
+       	        
+       	            <home>
+        	            <player name="Cesc Fabregas" event="goals" time="64" />
+						<player name="David Silva" event="substs" time="64" />
+        	            <player name="Jesus Navas" event="substs" time="64" />
+        	            <player name="Cesc Fabregas" event="substs" time="74" />
+        	            <player name="Fernando Torres" event="substs" time="74" />
+        	            <player name="Alvaro Arbeloa" event="yells" time="84" />
+        	            <player name="Fernando Torres" event="yells" time="84" />
+        	        </home>
+        	        <away>
+        	            <player name="Mario Balotelli" event="yells" time="37" />
+        	            <player name="Mario Balotelli" event="substs" time="56" />
+        	            <player name="Antonio Di Natale" event="substs" time="56" />
+        	            <player name="Antonio Cassano" event="substs" time="65" />
+        	            <player name="Sebastian Giovinco" event="substs" time="65" />
+						<player name="Leonardo Bonucci" event="yells" time="66" />
+        	            <player name="Giorgio Chiellini" event="yells" time="79" />
+        	            <player name="Christian Maggio" event="yells" time="89" />
+        	            <player name="Thiago Motta" event="substs" time="90" />
+        	            <player name="Antonio Nocerino" event="substs" time="90" />
+        	        </away>
+       	        
+       	    </game>
+       	    <game home="Ireland" away="Croatia" result="1:3" date="10 June 2012">
+       	        
+       	            <home>
+        	            <player name="Sean St Ledger" event="goals" time="19" />
+						<player name="Keith Andrews" event="yells" time="45+1" />
+						<player name="Kevin Doyle" event="substs" time="53" />
+        	            <player name="Jon Walters" event="substs" time="53" />
+        	            <player name="Aiden McGeady" event="substs" time="54" />
+        	            <player name="Simon Cox" event="substs" time="54" />
+        	            <player name="Robbie Keane" event="substs" time="75" />
+        	            <player name="Shane Long" event="substs" time="75" />
+        	        </home>
+        	        <away>
+        	            <player name="Mario Mandzukic" event="goals" time="3" />
+        	            <player name="Nikica Jelavic" event="goals" time="43" />
+        	            <player name="Mario Mandzukic" event="goals" time="49" />
+        	            <player name="Luka Modric" event="yells" time="53" />
+        	            <player name="Nikica Jelavic" event="substs" time="72" />
+        	            <player name="Niko Kranjcar" event="substs" time="72" />
+        	            <player name="Niko Kranjcar" event="yells" time="84" />
+        	            <player name="Ivan Perisic" event="substs" time="89" />
+        	            <player name="Eduardo" event="substs" time="89" />
+        	            <player name="Ivan Rakitic" event="substs" time="90+2" />
+        	            <player name="Tomislav Dujmovic" event="substs" time="90+2" />
+        	        </away>
+       	        
+       	    </game>
+       	    <game home="Italy" away="Croatia" result="1:1" date="14 June 2012">
+       	        
+       	            <home>
+        	            <player name="Andrea Pirlo" event="goals" time="39" />
+						<player name="Thiago Motta" event="yells" time="56" />
+						<player name="Thiago Motta" event="substs" time="62" />
+        	            <player name="Riccardo Montolivo" event="substs" time="62" />
+        	            <player name="Mario Balotelli" event="substs" time="69" />
+        	            <player name="Antonio Di Natale" event="substs" time="69" />
+        	            <player name="Riccardo Montolivo" event="yells" time="80" />
+        	            <player name="Antonio Cassano" event="substs" time="83" />
+        	            <player name="Sebastian Giovinco" event="substs" time="83" />
+        	        </home>
+        	        <away>
+        	            <player name="Ivan Perisic" event="substs" time="68" />
+        	            <player name="Danijel Pranjic" event="substs" time="68" />
+        	            <player name="Mario Mandzukic" event="goals" time="72" />
+        	            <player name="Nikica Jelavic" event="substs" time="83" />
+        	            <player name="Eduardo" event="substs" time="83" />
+        	            <player name="Gordon Schildenfeld" event="yells" time="86" />
+        	            <player name="Mario Mandzukic" event="substs" time="90+4" />
+        	            <player name="Niko Kranjcar" event="substs" time="90+4" />
+        	        </away>
+       	        
+       	    </game>
+       	    <game home="Spain" away="Ireland" result="4:0" date="14 June 2012">
+       	        
+       	            <home>
+        	            <player name="Fernando Torres" event="goals" time="4" />
+        	            <player name="David Silva" event="goals" time="49" />
+        	            <player name="Xabi Alonso" event="goals" time="56" />      	            
+						<player name="Xabi Alonso" event="substs" time="65" />
+        	            <player name="Javi Martinez" event="substs" time="65" />
+        	            <player name="Fernando Torres" event="goals" time="70" />
+        	            <player name="Fernando Torres" event="substs" time="74" />
+        	            <player name="Cesc Fabregas" event="substs" time="74" />
+        	            <player name="Javi Martinez" event="yells" time="76" />
+        	            <player name="Andres Iniesta" event="substs" time="80" />
+        	            <player name="Santi Cazorla" event="substs" time="80" />
+        	            <player name="Cesc Fabregas" event="yells" time="83" />
+        	        </home>
+        	        <away>
+        	            <player name="Robbie Keane " event="yells" time="36" />
+        	            <player name="Glenn Whelan" event="yells" time="45+1" />
+        	            <player name="Simon Cox" event="substs" time="46" />
+        	            <player name="Jon Walters" event="substs" time="46" />
+        	            <player name="Damien Duff" event="substs" time="76" />
+        	            <player name="James McClean" event="substs" time="76" />
+        	            <player name="Glenn Whelan" event="substs" time="80" />
+        	            <player name="Paul Green" event="substs" time="80" />
+        	            <player name="Sean St Ledger" event="yells" time="84" />
+        	        </away>
+       	        
+       	    </game>
+		</games>
+	</group>
+	<group name="D">
+        <teams>
+	        <team name="Ukraine" W="1" D="0" L="0" F="2" A="1" Pts="3" />
+	        <team name="England" W="0" D="1" L="0" F="1" A="0" Pts="1" />
+	        <team name="France" W="0" D="1" L="0" F="1" A="0" Pts="1" />
+	        <team name="Sweden" W="0" D="0" L="1" F="1" A="2" Pts="0" />
+        </teams>
+        <games>
+        	<game home="France" away="England" result="1:1" date="11 June 2012">
+       	        
+       	            <home>
+        	            <player name="Samir Nasri" event="goals" time="39" />   	            
+						<player name="Florent Malouda" event="substs" time="85" />
+        	            <player name="Marvin Martin" event="substs" time="85" />
+        	            <player name="Yohan Cabaye" event="substs" time="85" />
+        	            <player name="Hatem Ben Arfa" event="substs" time="85" />
+        	        </home>
+        	        <away>
+        	            <player name="Joleon Lescott " event="goals" time="36" />
+        	            <player name="Alex Chamberlain" event="yells" time="34" />
+        	            <player name="Ashley Young" event="yells" time="71" />
+        	            <player name="Alex Chamberlain" event="substs" time="77" />
+        	            <player name="Jermain Defoe" event="substs" time="77" />
+        	            <player name="Scott Parker" event="substs" time="78" />
+        	            <player name="Jordan Henderson" event="substs" time="78" />
+        	            <player name="Danny Welbeck" event="substs" time="90" />
+        	            <player name="PTheo Walcott" event="substs" time="90" />
+        	        </away>
+       	        
+       	    </game>
+       	    <game home="Ukraine" away="Sweden" result="2:1" date="11 June 2012">
+       	        
+       	            <home>
+        	            <player name="Andriy Shevchenko" event="goals" time="55" />   	            
+						<player name="Andriy Shevchenko" event="goals" time="62" />
+        	            <player name="Andriy Shevchenko" event="substs" time="81" />
+        	            <player name="Artem Milevskiy" event="substs" time="81" />
+        	            <player name="Andriy Voronin" event="substs" time="85" />
+        	            <player name="Ruslan Rotan" event="substs" time="85" />
+        	            <player name="Yevhen Konoplyanka" event="substs" time="90+3" />
+        	            <player name="Marko Devic" event="substs" time="90+3" />
+        	        </home>
+        	        <away>
+        	            <player name="Kim Kallstrom" event="yells" time="11" />
+        	            <player name="Zlatan Ibrahimovic" event="goals" time="52" />
+        	            <player name="Ola Toivonen" event="substs" time="62" />
+        	            <player name="Anders Svensson" event="substs" time="62" />
+        	            <player name="Sebastian Larsson" event="substs" time="68" />
+        	            <player name="Christian Wilhelmsson" event="substs" time="68" />
+        	            <player name="Markus Rosenberg" event="substs" time="71" />
+        	            <player name="Johan Elmander" event="substs" time="71" />
+        	            <player name="Rasmus Elm" event="yells" time="83" />
+        	        </away>
+       	        
+       	    </game>
+    	</games>
+	</group>
+</europe_cup>

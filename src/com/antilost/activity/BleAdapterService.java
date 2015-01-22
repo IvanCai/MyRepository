@@ -3,6 +3,9 @@ package com.antilost.activity;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Hex;
+
 import com.antilost.Listener.SBOnchangedListener;
 import com.antilost.util.Parser;
 
@@ -45,9 +48,9 @@ public class BleAdapterService extends Service {
 	public final static String EXTRA_DATA = "ble.EXTRA_DATA";
 	public final static String EXTRA_CDATA = "ble.EXTRA_CDATA";
 	public final static String ACTION_NOFITICATION = "ble.ACTION_NOFITICATION";
-	public static String PUSH_BUTTON_SERVICE_UUID = "00001000-0000-1000-8000-00805f9b34fb";
-	public static String PUSH_BUTTON_SERVICE_CHARACTERISTIC = "00001003-0000-1000-8000-00805f9b34fb";// 可写入uuid
-	public static String PUSH_BUTTON_SERVICE_CHARACTERISTIC2 = "00001002-0000-1000-8000-00805f9b34fb";// 可开启通知uuid
+	public static String PUSH_BUTTON_SERVICE_UUID = "0000FFF0-0000-1000-8000-00805f9b34fb";
+	public static String PUSH_BUTTON_SERVICE_CHARACTERISTIC = "0000FFF1-0000-1000-8000-00805f9b34fb";// 可写入uuid
+	public static String PUSH_BUTTON_SERVICE_CHARACTERISTIC2 = "0000FFF2-0000-1000-8000-00805f9b34fb";// 可开启通知uuid
 	public static String PUSH_BUTTON_SERVICE_DESCRIPTOR = "00002902-0000-1000-8000-00805f9b34fb";// 自定义特征2的描述uuid
 	@SuppressLint("NewApi")
 	private final BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
@@ -57,13 +60,12 @@ public class BleAdapterService extends Service {
 			// TODO Auto-generated method stub
 
 			if (newState == BluetoothProfile.STATE_CONNECTED) {
-			boolean b= 	mBluetoothGatt.discoverServices();
+				boolean b = mBluetoothGatt.discoverServices();
 				broadcastUpdate(ACTION_GATT_CONNECTED);
-				
+
 				Log.e("tag", "connected");
 			} else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
 				broadcastUpdate(ACTION_GATT_DISCONNECTED);
-
 			}
 		}
 
@@ -145,7 +147,6 @@ public class BleAdapterService extends Service {
 			if (mBluetoothAdapter == null) {
 				Log.e(TAG, "Unable to obtain a BluetoothAdapter.");
 				return false;
-
 			}
 
 		}
@@ -175,27 +176,25 @@ public class BleAdapterService extends Service {
 		Intent intent = new Intent(action);
 		sendBroadcast(intent);
 	}
-
 	private void broadcastUpdate(final String action,
 			BluetoothGattCharacteristic charc) {
-		byte b[] = charc.getValue();
-		int i = Parser.byteToInt2(b);
-		if(i==alertValueI||i==cancleAlertValueI)
-			return;
+		byte b[]=charc.getValue();
+		String encodedHexStr=new String(Hex.encodeHex(b));
 		Intent intent = new Intent(action);
-		byte c[] = charc.getValue();
-		intent.putExtra("CharValue", b);
+		intent.putExtra("encodedHexStr", encodedHexStr);
 		sendBroadcast(intent);
 	}
 
 	public boolean connect(final String address) {
+		if (mBluetoothGatt != null)
+			{
+				mBluetoothGatt.close();
+			}
 		final BluetoothDevice device = mBluetoothAdapter
 				.getRemoteDevice(address);
 		mBluetoothGatt = device.connectGatt(this, false, mGattCallback);
-		if (mBluetoothGatt != null)
-			return true;
 		Log.w(TAG, "trying to create a new connection");
-		return false;
+		return true;
 	}
 
 	public void disconnect() {// 关闭
@@ -290,7 +289,7 @@ public class BleAdapterService extends Service {
 	}
 
 	public boolean writeCharacteristic(String serviceUuid,
-			String charatisticUuid, byte[] value) {
+			String charatisticUuid, String content) {
 		if (mBluetoothAdapter == null || mBluetoothGatt == null) {
 			return false;
 		}
@@ -303,6 +302,13 @@ public class BleAdapterService extends Service {
 				.getCharacteristic(java.util.UUID.fromString(charatisticUuid));
 		if (gattCharacteristic == null) {
 			return false;
+		}
+		byte[] value = null;
+		try {
+			value = Hex.decodeHex(content.toCharArray());
+		} catch (DecoderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		gattCharacteristic.setValue(value);
 

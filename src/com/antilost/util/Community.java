@@ -1,6 +1,6 @@
 package com.antilost.util;
 
-public  class Community {
+public class Community {
 	public static  Boolean near=true;
 	public static  Boolean mid=false;
 	public static Boolean far=false;

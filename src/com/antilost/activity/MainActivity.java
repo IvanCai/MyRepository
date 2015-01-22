@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.apache.commons.codec.binary.Hex;
+
 import com.antilost.Listener.LocationCallbackListener;
 import com.antilost.Listener.SBOnchangedListener;
 import com.antilost.components.SwitchButton;
@@ -58,7 +60,7 @@ public class MainActivity extends Activity {
 	private boolean nearDistance = true;
 	private boolean midDistance = false;
 	private boolean farDistance = false;
-	private boolean ifconnected = false;
+	private boolean isConnected = false;
 	private Timer readRssiTimer;
 	private Timer animationTimer;
 	private static BleAdapterService mbleAdapterService;
@@ -68,15 +70,15 @@ public class MainActivity extends Activity {
 	private boolean isFrist = true;
 	private Boolean isSoundOn = false;
 	private Boolean isVirateOn = false;
+	private boolean manualConnectionFlag = false;
 	public static int whichRing = 1;
-	public static byte alertValue[] = { 17, 17, 17, 17 };
-	public static byte cancelAlertValue[] = { 34, 34, 34, 34 };
 	public static Handler locationHandler;
-	private int alertValueI = 286331153;
-	private byte temp[] = { 0, 0, 0 };
 	private static final int SENDSUCCESSFLU = 10086;
 	private static final int URGENTSITUATIONNOTSAVED = 110;
 	private boolean initMapresFalg = false;
+	private boolean autoConnectedFlag = false;
+	private static String alertOnContent = "ac11111111";
+	private static String alertOffContent = "ac00000000";
 
 	@SuppressLint("NewApi")
 	@Override
@@ -120,7 +122,7 @@ public class MainActivity extends Activity {
 		sb_protection.setEnabled(false);
 		sb_alert.setEnabled(false);
 		sb_find.setEnabled(false);
-		
+
 	}
 
 	private final ServiceConnection serviceConnection = new ServiceConnection() { // 与BleAdapterService连接
@@ -163,17 +165,15 @@ public class MainActivity extends Activity {
 	};
 
 	public void connectWithServer(View view) {
-		if (!ifconnected) {
+		if (!isConnected) {
 
 			if (mbleAdapterService.connect(Community.address)) {
-				ifconnected = true;
+				manualConnectionFlag = true;
 				return;
 			}
-		}
-		if (ifconnected) {
+		} else {
 			mbleAdapterService.disconnect();
-			ifconnected = false;
-
+			manualConnectionFlag = false;
 		}
 	}
 
@@ -181,7 +181,8 @@ public class MainActivity extends Activity {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		Log.w("Activity process id:", String.valueOf(android.os.Process.myPid()));
+		Log.w("Activity process id:",
+				String.valueOf(android.os.Process.myPid()));
 	}
 
 	@Override
@@ -227,6 +228,7 @@ public class MainActivity extends Activity {
 				sb_protection.setEnabled(true);
 				sb_alert.setEnabled(true);
 				sb_find.setEnabled(true);
+				isConnected = true;
 				if (!initMapresFalg) {
 					new Handler().postDelayed(new Runnable() {
 
@@ -242,18 +244,22 @@ public class MainActivity extends Activity {
 					mp.setLooping(false);
 				if (isFrist) {
 					isFrist = false;
-				} else
+				} else {
 					delay = false;
+					autoConnectedFlag = true;
+				}
 			}
-
 			if (BleAdapterService.ACTION_GATT_DISCONNECTED.equals(action)) {
+				mbleAdapterService.disconnect();
 				Toast.makeText(MainActivity.this, "断开连接", 1000).show();
 				img_connectedState
 						.setBackgroundResource(R.drawable.disconnected);
+				isConnected = false;
 				// 判断断开方式，如果为手动断开，则不会触发自动连接
-				if (ifconnected) {
+				if (manualConnectionFlag) {
 					delay = true;
-					new Handler().postDelayed(myRunnable, 13000);
+					mbleAdapterService.reconnect();
+					new Handler().postDelayed(myRunnable, 10000);
 				}
 			}
 			if (BleAdapterService.ACTION_DATA_AVAILABLE.equals(action)) {
@@ -270,16 +276,16 @@ public class MainActivity extends Activity {
 			if (BleAdapterService.ACTION_CDATA_AVAILABLE.equals(action)) {
 
 			}
+
 			if (BleAdapterService.ACTION_NOFITICATION.equals(action)) {
-				byte value[] = intent.getByteArrayExtra("CharValue");
-				Log.w("value", value.toString());
-				// 第一个功能按键触发事件
-				if (value[3] != temp[0]) {
+				String encodedHexStr = intent.getStringExtra("encodedHexStr");
+				// 一级报警按键触发事件
+				if (encodedHexStr.equals("aa03ad")) {
 					playSound();
 				}
 				if (SBOnchangedListener.startNoti) {
-					// 第二个功能按键触发事件
-					if (value[1] != temp[1]) {
+					// 紧急防护按键触发事件
+					if (encodedHexStr.equals("aa02ac")) {
 						SharedPreferences contactShares = getSharedPreferences(
 								"contact", MODE_PRIVATE);
 						final String contact1 = contactShares.getString(
@@ -342,8 +348,8 @@ public class MainActivity extends Activity {
 					}
 
 				}
-				// 第三个功能按键触发事件
-				if (value[2] != temp[2]) {
+				// 自拍功能按键触发事件
+				if (encodedHexStr.equals("aa01ab")) {
 					if (CameraActivity.mCamera != null) {
 						CameraActivity.mCamera.takePicture(
 								CameraActivity.shutter, null,
@@ -354,9 +360,6 @@ public class MainActivity extends Activity {
 						;
 					}
 				}
-				temp[0] = value[3];
-				temp[1] = value[1];
-				temp[2] = value[2];
 			}
 		}
 
@@ -391,17 +394,17 @@ public class MainActivity extends Activity {
 		if (SBOnchangedListener.isProtectionON) {
 			byte CharCacheValue[] = mbleAdapterService.getCurrentChar()
 					.getValue();
-			int CharValueInt = 0;
+			String encodedStrVal = "";
 			if (CharCacheValue != null) {
-				CharValueInt = Parser.byteToInt2(CharCacheValue);
+				encodedStrVal = new String(Hex.encodeHex(CharCacheValue));
 			}
 			if (nearDistance) {
-				if (rssi > -55 && CharValueInt == alertValueI) {
+				if (rssi > -55 && encodedStrVal.equals(alertOnContent)) {
 					mbleAdapterService
 							.writeCharacteristic(
 									BleAdapterService.PUSH_BUTTON_SERVICE_UUID,
 									BleAdapterService.PUSH_BUTTON_SERVICE_CHARACTERISTIC,
-									cancelAlertValue);
+									alertOffContent);
 
 				}
 				if (rssi < -55) {
@@ -409,7 +412,7 @@ public class MainActivity extends Activity {
 							.writeCharacteristic(
 									BleAdapterService.PUSH_BUTTON_SERVICE_UUID,
 									BleAdapterService.PUSH_BUTTON_SERVICE_CHARACTERISTIC,
-									alertValue))
+									alertOnContent))
 						;
 					;
 					if (isSoundOn)
@@ -420,19 +423,19 @@ public class MainActivity extends Activity {
 
 			}
 			if (midDistance) {
-				if (rssi > -68 && CharValueInt == alertValueI) {
+				if (rssi > -68 && encodedStrVal.equals(alertOnContent)) {
 					mbleAdapterService
 							.writeCharacteristic(
 									BleAdapterService.PUSH_BUTTON_SERVICE_UUID,
 									BleAdapterService.PUSH_BUTTON_SERVICE_CHARACTERISTIC,
-									cancelAlertValue);
+									alertOffContent);
 				}
 				if (rssi < -68) {
 					if (mbleAdapterService
 							.writeCharacteristic(
 									BleAdapterService.PUSH_BUTTON_SERVICE_UUID,
 									BleAdapterService.PUSH_BUTTON_SERVICE_CHARACTERISTIC,
-									alertValue))
+									alertOnContent))
 						if (isSoundOn)
 							playSound();
 					if (isVirateOn)
@@ -441,19 +444,19 @@ public class MainActivity extends Activity {
 
 			}
 			if (farDistance) {
-				if (rssi > -78 && CharValueInt == alertValueI) {
+				if (rssi > -78 && encodedStrVal.equals(alertOnContent)) {
 					mbleAdapterService
 							.writeCharacteristic(
 									BleAdapterService.PUSH_BUTTON_SERVICE_UUID,
 									BleAdapterService.PUSH_BUTTON_SERVICE_CHARACTERISTIC,
-									cancelAlertValue);
+									alertOffContent);
 				}
 				if (rssi < -78) {
 					if (mbleAdapterService
 							.writeCharacteristic(
 									BleAdapterService.PUSH_BUTTON_SERVICE_UUID,
 									BleAdapterService.PUSH_BUTTON_SERVICE_CHARACTERISTIC,
-									alertValue))
+									alertOnContent))
 						if (isSoundOn)
 							playSound();
 					if (isVirateOn)
@@ -469,14 +472,14 @@ public class MainActivity extends Activity {
 				+ mbleAdapterService.writeCharacteristic(
 						BleAdapterService.PUSH_BUTTON_SERVICE_UUID,
 						BleAdapterService.PUSH_BUTTON_SERVICE_CHARACTERISTIC,
-						alertValue));
+						alertOnContent));
 	}
 
 	public static void cancalFindAntiLostor() {
 		mbleAdapterService.writeCharacteristic(
 				BleAdapterService.PUSH_BUTTON_SERVICE_UUID,
 				BleAdapterService.PUSH_BUTTON_SERVICE_CHARACTERISTIC,
-				cancelAlertValue);
+				alertOffContent);
 	}
 
 	private void playSound() {
@@ -533,7 +536,7 @@ public class MainActivity extends Activity {
 			// TODO Auto-generated method stub
 			if (delay) {
 				LocationActivity.mLocationClient.start();
-				mbleAdapterService.reconnect();
+				mbleAdapterService.disconnect();
 				vibrator.vibrate(1500);
 				mp = new MediaPlayer();
 				AssetFileDescriptor afd = getResources().openRawResourceFd(
@@ -619,13 +622,15 @@ public class MainActivity extends Activity {
 					byte[] charValue = mbleAdapterService.getCurrentChar()
 							.getValue();
 					if (charValue != null) {
-						int charValueInt = Parser.byteToInt2(charValue);
-						if (charValueInt == alertValueI) {
+						String encodedStrVal = new String(
+								Hex.encodeHex(charValue));
+
+						if (encodedStrVal.equals(alertOnContent)) {
 							mbleAdapterService
 									.writeCharacteristic(
 											BleAdapterService.PUSH_BUTTON_SERVICE_UUID,
 											BleAdapterService.PUSH_BUTTON_SERVICE_CHARACTERISTIC,
-											cancelAlertValue);
+											alertOffContent);
 						}
 					}
 				}
@@ -644,13 +649,15 @@ public class MainActivity extends Activity {
 					byte[] charValue = mbleAdapterService.getCurrentChar()
 							.getValue();
 					if (charValue != null) {
-						int charValueInt = Parser.byteToInt2(charValue);
-						if (charValueInt == alertValueI) {
+						String encodedStrVal = new String(
+								Hex.encodeHex(charValue));
+
+						if (encodedStrVal.equals(alertOnContent)) {
 							mbleAdapterService
 									.writeCharacteristic(
 											BleAdapterService.PUSH_BUTTON_SERVICE_UUID,
 											BleAdapterService.PUSH_BUTTON_SERVICE_CHARACTERISTIC,
-											cancelAlertValue);
+											alertOffContent);
 						}
 					}
 				}
@@ -667,13 +674,17 @@ public class MainActivity extends Activity {
 				if (mbleAdapterService.mBluetoothGatt != null) {
 					byte[] charValue = mbleAdapterService.getCurrentChar()
 							.getValue();
-					int charValueInt = Parser.byteToInt2(charValue);
-					if (charValueInt == alertValueI) {
-						mbleAdapterService
-								.writeCharacteristic(
-										BleAdapterService.PUSH_BUTTON_SERVICE_UUID,
-										BleAdapterService.PUSH_BUTTON_SERVICE_CHARACTERISTIC,
-										cancelAlertValue);
+					if (charValue != null) {
+						String encodedStrVal = new String(
+								Hex.encodeHex(charValue));
+
+						if (encodedStrVal.equals(alertOnContent)) {
+							mbleAdapterService
+									.writeCharacteristic(
+											BleAdapterService.PUSH_BUTTON_SERVICE_UUID,
+											BleAdapterService.PUSH_BUTTON_SERVICE_CHARACTERISTIC,
+											alertOffContent);
+						}
 					}
 				}
 				sb_find.setEnabled(true);

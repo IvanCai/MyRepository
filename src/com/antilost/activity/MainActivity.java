@@ -76,7 +76,10 @@ public class MainActivity extends Activity {
 	private static final int SENDSUCCESSFLU = 10086;
 	private static final int URGENTSITUATIONNOTSAVED = 110;
 	private boolean initMapresFalg = false;
-	private boolean autoConnectedFlag = false;
+	private boolean isThreadAlive = false;
+	private long startConTime;
+	private long feedbConTime;
+	private long spaConTime;
 	private static String alertOnContent = "ac11111111";
 	private static String alertOffContent = "ac00000000";
 
@@ -168,6 +171,7 @@ public class MainActivity extends Activity {
 		if (!isConnected) {
 
 			if (mbleAdapterService.connect(Community.address)) {
+				startConTime = System.currentTimeMillis();
 				manualConnectionFlag = true;
 				return;
 			}
@@ -246,10 +250,11 @@ public class MainActivity extends Activity {
 					isFrist = false;
 				} else {
 					delay = false;
-					autoConnectedFlag = true;
 				}
 			}
 			if (BleAdapterService.ACTION_GATT_DISCONNECTED.equals(action)) {
+				feedbConTime = System.currentTimeMillis();
+				spaConTime = (feedbConTime-startConTime);
 				mbleAdapterService.disconnect();
 				Toast.makeText(MainActivity.this, "断开连接", 1000).show();
 				img_connectedState
@@ -257,10 +262,12 @@ public class MainActivity extends Activity {
 				isConnected = false;
 				// 判断断开方式，如果为手动断开，则不会触发自动连接
 				if (manualConnectionFlag) {
-					delay = true;
 					mbleAdapterService.reconnect();
+					startConTime=System.currentTimeMillis();
+					if(spaConTime>1000){
 					new Handler().postDelayed(myRunnable, 10000);
-				}
+					delay = true;
+				}}
 			}
 			if (BleAdapterService.ACTION_DATA_AVAILABLE.equals(action)) {
 				if (addRssi(intent.getStringExtra(BleAdapterService.EXTRA_DATA))) {
